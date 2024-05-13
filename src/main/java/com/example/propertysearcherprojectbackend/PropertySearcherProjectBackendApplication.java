@@ -1,4 +1,4 @@
-package com.propertysearcherprojectbackend;
+package com.example.propertysearcherprojectbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

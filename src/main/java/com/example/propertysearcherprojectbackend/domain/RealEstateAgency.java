@@ -24,9 +24,9 @@ public class RealEstateAgency {
     private String phoneNumber;
 
     @OneToMany(targetEntity = Property.class,
-    mappedBy = "realEstateAgency",
-    cascade = CascadeType.ALL,
-    fetch = FetchType.EAGER
+            mappedBy = "realEstateAgency",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     private List<Property> properties;
 }

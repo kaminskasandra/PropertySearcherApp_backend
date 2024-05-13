@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,4 +36,10 @@ public class Property {
     @ManyToOne
     @JoinColumn(name = "AGENCY_ID")
     private RealEstateAgency realEstateAgency;
+
+    @OneToMany(targetEntity = Appointment.class,
+            mappedBy = "property",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<Appointment> appointments;
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -25,4 +27,10 @@ public class User {
 
     @Column(name = "USER_MAIL")
     private String mail;
+
+    @OneToMany(targetEntity = Appointment.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<Appointment> appointments;
 }

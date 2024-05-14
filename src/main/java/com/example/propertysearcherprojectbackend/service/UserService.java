@@ -6,7 +6,6 @@ import com.example.propertysearcherprojectbackend.exceptions.UserNotFoundExcepti
 import com.example.propertysearcherprojectbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public List<User> getAllUser() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -26,8 +25,8 @@ public class UserService {
         return userRepository.findById(userId);
     }
 
-    public User saveUser(UserDto user) {
-        return userRepository.save(modelMapper.map(user, User.class));
+    public User saveUser(UserDto userDto) {
+        return userRepository.save(modelMapper.map(userDto, User.class));
     }
 
     public void deleteUserById(final Long userId) {

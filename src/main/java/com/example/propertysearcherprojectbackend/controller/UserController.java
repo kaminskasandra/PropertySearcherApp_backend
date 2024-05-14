@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping()
     public List<UserDto> findAll() {
-        List<User> users = userService.getAllUser();
+        List<User> users = userService.getAllUsers();
         return users.stream()
                 .map(user -> modelMapper.map(user, UserDto.class))
                 .collect(Collectors.toList());

@@ -1,6 +1,5 @@
-package com.propertysearcherprojectbackend;
+package com.example.propertysearcherprojectbackend;
 
-import com.example.propertysearcherprojectbackend.PropertySearcherProjectBackendApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,5 +9,4 @@ class PropertySearcherProjectBackendApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

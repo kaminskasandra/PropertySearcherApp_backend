@@ -3,6 +3,7 @@ package com.example.propertysearcherprojectbackend.controller;
 import com.example.propertysearcherprojectbackend.domain.Appointment;
 import com.example.propertysearcherprojectbackend.dto.AppointmentDto;
 import com.example.propertysearcherprojectbackend.exceptions.AppointmentNotFoundException;
+import com.example.propertysearcherprojectbackend.exceptions.UserNotFoundException;
 import com.example.propertysearcherprojectbackend.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -42,6 +43,14 @@ public class AppointmentController {
     @GetMapping(value = "{appointmentId}")
     public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable Long appointmentId) {
         return ResponseEntity.ok(modelMapper.map(appointmentService.getAppointment(appointmentId), AppointmentDto.class));
+    }
+
+    @GetMapping("{userId}")
+    public List<AppointmentDto> getAppointmentsByUser(@PathVariable Long userId) throws UserNotFoundException {
+        List<Appointment> appointments = appointmentService.getAppointmentsByUserId(userId);
+        return appointments.stream()
+                .map(appointment -> modelMapper.map(appointment, AppointmentDto.class))
+                .collect(Collectors.toList());
     }
 
     @PutMapping(value = "{appointmentId}", consumes = MediaType.APPLICATION_JSON_VALUE)

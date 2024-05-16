@@ -1,9 +1,12 @@
 package com.example.propertysearcherprojectbackend.service;
 
 import com.example.propertysearcherprojectbackend.domain.Appointment;
+import com.example.propertysearcherprojectbackend.domain.User;
 import com.example.propertysearcherprojectbackend.dto.AppointmentDto;
 import com.example.propertysearcherprojectbackend.exceptions.AppointmentNotFoundException;
+import com.example.propertysearcherprojectbackend.exceptions.UserNotFoundException;
 import com.example.propertysearcherprojectbackend.repository.AppointmentRepository;
+import com.example.propertysearcherprojectbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import java.util.Optional;
 public class AppointmentService {
     private final ModelMapper modelMapper;
     private final AppointmentRepository appointmentRepository;
+    private final UserRepository userRepository;
 
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
@@ -41,4 +45,12 @@ public class AppointmentService {
             return saveAppointment(appointmentDto);
         }
     }
+
+    public List<Appointment> getAppointmentsByUserId(Long userId) throws UserNotFoundException {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            return user.getAppointments();
+        } else throw new UserNotFoundException("User with given id not found");
+    }
 }
+

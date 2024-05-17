@@ -5,6 +5,7 @@ import com.example.propertysearcherprojectbackend.domain.Mail;
 import com.example.propertysearcherprojectbackend.domain.User;
 import com.example.propertysearcherprojectbackend.service.EmailService;
 import com.example.propertysearcherprojectbackend.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ public class EmailScheduler {
 
 
     @Scheduled(cron = "0 0 7 * * *")
+    @Transactional
     public void sendInformationEmail() {
         HashMap<String, List<Appointment>> mailToSend = new HashMap<>();
 
@@ -42,7 +44,7 @@ public class EmailScheduler {
                     new Mail(
                             mails.getKey(),
                             SUBJECT,
-                            "You currently have" + mails.getValue().size() + " " + (mails.getValue().size() == 1 ? "meetings" : "meeting") + " scheduled for today"
+                            "You currently have " + mails.getValue().size() + " " + (mails.getValue().size() == 1 ? "meeting" : "meetings") + " scheduled for today"
                     )
             );
         }

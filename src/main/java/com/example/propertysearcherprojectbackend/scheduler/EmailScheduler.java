@@ -23,7 +23,6 @@ public class EmailScheduler {
     private final UserService userService;
     private final EmailService emailService;
 
-
     @Scheduled(cron = "0 0 7 * * *")
     @Transactional
     public void sendInformationEmail() {
@@ -41,11 +40,11 @@ public class EmailScheduler {
 
         for (Map.Entry<String, List<Appointment>> mails : mailToSend.entrySet()) {
             emailService.send(
-                    new Mail(
-                            mails.getKey(),
-                            SUBJECT,
-                            "You currently have " + mails.getValue().size() + " " + (mails.getValue().size() == 1 ? "meeting" : "meetings") + " scheduled for today"
-                    )
+                    Mail.builder()
+                            .mailTo(mails.getKey())
+                            .subject(SUBJECT)
+                            .message("Currently you have " + mails.getValue().size() + " " + (mails.getValue().size() == 1 ? "meeting" : "meetings") + " scheduled for today")
+                            .build()
             );
         }
     }

@@ -40,7 +40,7 @@ public class PropertyController {
     }
 
     @GetMapping(value = "{propertyId}")
-    public ResponseEntity<PropertyDto> getPropertyById(@PathVariable Long propertyId) {
+    public ResponseEntity<PropertyDto> getPropertyById(@PathVariable Long propertyId) throws PropertyNotFoundException {
         return ResponseEntity.ok(modelMapper.map(propertyService.getProperty(propertyId), PropertyDto.class));
     }
 

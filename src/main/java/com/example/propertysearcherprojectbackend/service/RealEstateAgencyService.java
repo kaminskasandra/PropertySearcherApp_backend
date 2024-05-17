@@ -21,16 +21,24 @@ public class RealEstateAgencyService {
         return realEstateAgencyRepository.findAll();
     }
 
-    public Optional<RealEstateAgency> getAgency(final Long agencyId) {
-        return realEstateAgencyRepository.findById(agencyId);
+    public Optional<RealEstateAgency> getAgency(final Long agencyId) throws RealEstateAgencyNotFoundException {
+        if (!realEstateAgencyRepository.existsById(agencyId)) {
+            throw new RealEstateAgencyNotFoundException("Agency with id %s not found");
+        } else {
+            return realEstateAgencyRepository.findById(agencyId);
+        }
     }
 
     public RealEstateAgency saveAgency(RealEstateAgencyDto realEstateAgencyDto) {
         return realEstateAgencyRepository.save(modelMapper.map(realEstateAgencyDto, RealEstateAgency.class));
     }
 
-    public void deleteAgencyById(Long agencyId) {
-        realEstateAgencyRepository.deleteById(agencyId);
+    public void deleteAgencyById(Long agencyId) throws RealEstateAgencyNotFoundException {
+        if (!realEstateAgencyRepository.existsById(agencyId)) {
+            throw new RealEstateAgencyNotFoundException("Agency with id %s not found");
+        } else {
+            realEstateAgencyRepository.deleteById(agencyId);
+        }
     }
 
     public RealEstateAgency updateAgency(RealEstateAgencyDto agencyDto, Long agencyId) throws RealEstateAgencyNotFoundException {

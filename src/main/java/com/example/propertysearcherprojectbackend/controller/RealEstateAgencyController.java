@@ -26,7 +26,7 @@ public class RealEstateAgencyController {
     }
 
     @DeleteMapping(value = "{agencyId}")
-    public ResponseEntity<Void> deleteAgency(@PathVariable Long agencyId) {
+    public ResponseEntity<Void> deleteAgency(@PathVariable Long agencyId) throws RealEstateAgencyNotFoundException {
         realEstateAgencyService.deleteAgencyById(agencyId);
         return ResponseEntity.ok().build();
     }

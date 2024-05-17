@@ -21,16 +21,24 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUser(final Long userId) {
-        return userRepository.findById(userId);
+    public Optional<User> getUser(final Long userId) throws UserNotFoundException {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException("User with id %s not found");
+        } else {
+            return userRepository.findById(userId);
+        }
     }
 
     public User saveUser(UserDto userDto) {
         return userRepository.save(modelMapper.map(userDto, User.class));
     }
 
-    public void deleteUserById(final Long userId) {
-        userRepository.deleteById(userId);
+    public void deleteUserById(final Long userId) throws UserNotFoundException {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException("User with id %s not found");
+        } else {
+            userRepository.deleteById(userId);
+        }
     }
 
     public User updateUser(UserDto userDto, long userId) throws UserNotFoundException {

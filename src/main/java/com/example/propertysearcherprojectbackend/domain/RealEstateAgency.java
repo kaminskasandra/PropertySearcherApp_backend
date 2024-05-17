@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "REAL_ESTATE_AGENCIES")
 public class RealEstateAgency {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "AGENCY_ID")
     private long agencyId;
 

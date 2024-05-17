@@ -21,8 +21,12 @@ public class PropertyService {
         return propertyRepository.findAll();
     }
 
-    public Optional<Property> getProperty(final Long propertyId) {
-        return propertyRepository.findById(propertyId);
+    public Optional<Property> getProperty(final Long propertyId) throws PropertyNotFoundException {
+        if (!propertyRepository.existsById(propertyId)) {
+            throw new PropertyNotFoundException("Property with id %s not found");
+        } else {
+            return propertyRepository.findById(propertyId);
+        }
     }
 
     public void deletePropertyById(Long propertyId) {

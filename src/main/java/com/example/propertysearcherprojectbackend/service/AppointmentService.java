@@ -25,12 +25,20 @@ public class AppointmentService {
         return appointmentRepository.findAll();
     }
 
-    public Optional<Appointment> getAppointment(final Long appointmentId) {
-        return appointmentRepository.findById(appointmentId);
+    public Optional<Appointment> getAppointment(final Long appointmentId) throws AppointmentNotFoundException {
+        if (!appointmentRepository.existsById(appointmentId)) {
+            throw new AppointmentNotFoundException("Appointment with id %s not found");
+        } else {
+            return appointmentRepository.findById(appointmentId);
+        }
     }
 
-    public void deleteAppointmentById(Long appointmentId) {
-        appointmentRepository.deleteById(appointmentId);
+    public void deleteAppointmentById(Long appointmentId) throws AppointmentNotFoundException {
+        if (!appointmentRepository.existsById(appointmentId)) {
+            throw new AppointmentNotFoundException("Appointment with id %s not found");
+        } else {
+            appointmentRepository.deleteById(appointmentId);
+        }
     }
 
     public Appointment saveAppointment(AppointmentDto appointmentDto) {

@@ -27,7 +27,7 @@ public class AppointmentController {
     }
 
     @DeleteMapping(value = "{appointmentId}")
-    public ResponseEntity<Void> deleteAppointment(@PathVariable Long appointmentId) {
+    public ResponseEntity<Void> deleteAppointment(@PathVariable Long appointmentId) throws AppointmentNotFoundException {
         appointmentService.deleteAppointmentById(appointmentId);
         return ResponseEntity.ok().build();
     }
@@ -41,7 +41,7 @@ public class AppointmentController {
     }
 
     @GetMapping(value = "{appointmentId}")
-    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable Long appointmentId) {
+    public ResponseEntity<AppointmentDto> getAppointmentById(@PathVariable Long appointmentId) throws AppointmentNotFoundException {
         return ResponseEntity.ok(modelMapper.map(appointmentService.getAppointment(appointmentId), AppointmentDto.class));
     }
 

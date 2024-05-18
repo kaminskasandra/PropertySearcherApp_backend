@@ -92,7 +92,7 @@ public class RealEstateAgencyControllerTest {
         verify(realEstateAgencyService, times(1)).getAllAgencies();
     }
     @Test
-    void updatePropertyTest() throws Exception {
+    void updateAgencyTest() throws Exception {
         // Given
         RealEstateAgencyDto realEstateAgencyDto = new RealEstateAgencyDto();
         realEstateAgencyDto.setAgencyId(2L);
@@ -102,7 +102,7 @@ public class RealEstateAgencyControllerTest {
         when(modelMapper.map(any(), eq(RealEstateAgencyDto.class))).thenReturn(realEstateAgencyDto);
 
         // When & Then
-        mockMvc.perform(MockMvcRequestBuilders.put("/v1/agencies/{propertyId}", 2)
+        mockMvc.perform(MockMvcRequestBuilders.put("/v1/agencies/{agencyId}", 2)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(realEstateAgencyDto)))
                 .andExpect(MockMvcResultMatchers.status().isOk())

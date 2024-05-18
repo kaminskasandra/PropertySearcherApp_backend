@@ -45,7 +45,7 @@ public class AppointmentController {
         return ResponseEntity.ok(modelMapper.map(appointmentService.getAppointment(appointmentId), AppointmentDto.class));
     }
 
-    @GetMapping("{userId}")
+    @GetMapping("user/{userId}")
     public List<AppointmentDto> getAppointmentsByUser(@PathVariable Long userId) throws UserNotFoundException {
         List<Appointment> appointments = appointmentService.getAppointmentsByUserId(userId);
         return appointments.stream()

@@ -30,6 +30,9 @@ public class Property {
     @Column(name = "ADRRESS")
     private String address;
 
+    @Column(name = "DESCRIPTION")
+    private String description;
+
     @Column(name = "AREA")
     private double area;
 

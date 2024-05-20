@@ -22,6 +22,9 @@ public class Appointment {
     @Column(name = "DATE_OF_MEETING")
     private LocalDate dateOfMeeting;
 
+    @Column(name = "DESCRIPTION")
+    private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROPERTY_ID")
     private Property property;

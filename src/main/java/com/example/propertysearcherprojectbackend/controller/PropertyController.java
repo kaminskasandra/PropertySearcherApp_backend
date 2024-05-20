@@ -26,7 +26,7 @@ public class PropertyController {
     }
 
     @DeleteMapping(value = "{propertyId}")
-    public ResponseEntity<Void> deleteProperty(@PathVariable Long propertyId) {
+    public ResponseEntity<Void> deleteProperty(@PathVariable Long propertyId) throws PropertyNotFoundException{
         propertyService.deletePropertyById(propertyId);
         return ResponseEntity.ok().build();
     }

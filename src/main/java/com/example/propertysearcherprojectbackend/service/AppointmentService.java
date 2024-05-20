@@ -1,6 +1,7 @@
 package com.example.propertysearcherprojectbackend.service;
 
 import com.example.propertysearcherprojectbackend.domain.Appointment;
+import com.example.propertysearcherprojectbackend.domain.AuditMessage;
 import com.example.propertysearcherprojectbackend.domain.User;
 import com.example.propertysearcherprojectbackend.dto.AppointmentDto;
 import com.example.propertysearcherprojectbackend.exceptions.AppointmentNotFoundException;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class AppointmentService {
     private final ModelMapper modelMapper;
     private final AppointmentRepository appointmentRepository;
+    private final AuditMessageService auditMessageService;
     private final UserRepository userRepository;
 
     public List<Appointment> getAllAppointments() {
@@ -37,12 +40,21 @@ public class AppointmentService {
         if (!appointmentRepository.existsById(appointmentId)) {
             throw new AppointmentNotFoundException("Appointment with id %s not found");
         } else {
+            auditMessageService.saveAuditMessage(AuditMessage.builder()
+                    .message("Appointment deleted: appointment id " + appointmentId)
+                    .createdAt(LocalDateTime.now())
+                    .build());
             appointmentRepository.deleteById(appointmentId);
         }
     }
 
     public Appointment saveAppointment(AppointmentDto appointmentDto) {
-        return appointmentRepository.save(modelMapper.map(appointmentDto, Appointment.class));
+       Appointment appointment = appointmentRepository.save(modelMapper.map(appointmentDto, Appointment.class));
+        auditMessageService.saveAuditMessage(AuditMessage.builder()
+                .message("New appointment added: " + appointment.getAppointmentId() + " " + appointment.getAppointmentId())
+                .createdAt(LocalDateTime.now())
+                .build());
+        return appointment;
     }
 
     public Appointment updateAppointment(AppointmentDto appointmentDto, Long appointmentId) throws AppointmentNotFoundException {

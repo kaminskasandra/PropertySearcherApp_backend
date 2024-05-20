@@ -103,8 +103,4 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.userId").value(2));
     }
-    @Test
-    void gettUserByIdTest() throws Exception {
-
-    }
 }

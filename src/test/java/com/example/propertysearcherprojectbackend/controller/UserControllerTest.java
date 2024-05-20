@@ -1,9 +1,7 @@
 package com.example.propertysearcherprojectbackend.controller;
 
-import com.example.propertysearcherprojectbackend.domain.Appointment;
 import com.example.propertysearcherprojectbackend.domain.LocalDateAdapter;
 import com.example.propertysearcherprojectbackend.domain.User;
-import com.example.propertysearcherprojectbackend.dto.AppointmentDto;
 import com.example.propertysearcherprojectbackend.dto.UserDto;
 import com.example.propertysearcherprojectbackend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,7 +50,7 @@ public class UserControllerTest {
         when(modelMapper.map(any(), eq(User.class))).thenReturn(user);
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalDate.class, LocalDateAdapter.getInstance())
                 .create();
         String jsonContent = gson.toJson(user);
 

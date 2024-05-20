@@ -9,7 +9,15 @@ import java.time.format.DateTimeFormatter;
 
 public class LocalDateAdapter extends TypeAdapter<LocalDate> {
 
+    private static final LocalDateAdapter INSTANCE = new LocalDateAdapter();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    private LocalDateAdapter() {
+    }
+
+    public static LocalDateAdapter getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public void write(JsonWriter out, LocalDate value) throws IOException {

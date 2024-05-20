@@ -51,7 +51,7 @@ public class AppointmentControllerTest {
         when(appointmentService.saveAppointment(any(AppointmentDto.class))).thenReturn(appointment);
         when(modelMapper.map(any(), eq(Appointment.class))).thenReturn(appointment);
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalDate.class, LocalDateAdapter.getInstance())
                 .create();
         String jsonContent = gson.toJson(appointmentDto);
 

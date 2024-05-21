@@ -17,7 +17,7 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "APPOINTMENT_ID")
-    private long appointmentId;
+    private Long appointmentId;
 
     @Column(name = "DATE_OF_MEETING")
     private LocalDate dateOfMeeting;
@@ -25,11 +25,11 @@ public class Appointment {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PROPERTY_ID")
     private Property property;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
 }

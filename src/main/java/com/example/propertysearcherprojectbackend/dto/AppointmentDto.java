@@ -10,8 +10,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentDto {
-    private long appointmentId;
+    private Long appointmentId;
     private LocalDate dateOfMeeting;
-    private long propertyId;
-    private long userId;
+    private String description;
+    private Long propertyId;
+    private Long userId;
 }

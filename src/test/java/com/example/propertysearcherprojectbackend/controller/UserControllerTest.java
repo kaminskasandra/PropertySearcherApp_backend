@@ -45,7 +45,7 @@ public class UserControllerTest {
     @Test
     void saveUserTest() throws Exception {
         //Given
-        User user = new User(1L, "Jane", "Doe", "example@test.com", null);
+        User user = new User();
         when(userService.saveUser(any(UserDto.class))).thenReturn(user);
         when(modelMapper.map(any(), eq(User.class))).thenReturn(user);
 

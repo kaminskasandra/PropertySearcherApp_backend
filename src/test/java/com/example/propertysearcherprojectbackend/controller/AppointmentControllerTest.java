@@ -46,7 +46,7 @@ public class AppointmentControllerTest {
     @Test
     void saveAppointmentTest() throws Exception {
         // Given
-        Appointment appointment = new Appointment(1L, LocalDate.now(), null, null);
+        Appointment appointment = new Appointment();
         AppointmentDto appointmentDto = new AppointmentDto();
         when(appointmentService.saveAppointment(any(AppointmentDto.class))).thenReturn(appointment);
         when(modelMapper.map(any(), eq(Appointment.class))).thenReturn(appointment);

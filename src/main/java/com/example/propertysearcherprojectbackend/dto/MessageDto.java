@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageDto {
+    private Long messageId;
     private String text;
     private LocalDate date;
     private MessageCategory messageCategory;

@@ -37,8 +37,8 @@ public class Property {
     private double area;
 
     @ManyToOne
-    @JoinColumn(name = "AGENCY_ID")
-    private RealEstateAgency realEstateAgency;
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
     @OneToMany(targetEntity = Appointment.class,
             mappedBy = "property",

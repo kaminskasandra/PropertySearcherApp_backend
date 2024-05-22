@@ -25,12 +25,24 @@ public class User {
     @Column(name = "USER_LAST_NAME")
     private String userLastName;
 
-    @Column(name = "USER_MAIL")
+    @Column(name = "USER_MAIL", unique = true)
     private String mail;
+
+    @OneToMany(mappedBy = "fromUserMail", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Message> sentMessages;
+
+    @OneToMany(mappedBy = "toUserMail", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Message> receivedMessages;
 
     @OneToMany(targetEntity = Appointment.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private List<Appointment> appointments;
+
+    @OneToMany(targetEntity = Property.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    private List<Property> properties;
 }

@@ -2,9 +2,12 @@ package com.example.propertysearcherprojectbackend.service;
 
 import com.example.propertysearcherprojectbackend.domain.AuditMessage;
 import com.example.propertysearcherprojectbackend.domain.Property;
+import com.example.propertysearcherprojectbackend.domain.User;
 import com.example.propertysearcherprojectbackend.dto.PropertyDto;
 import com.example.propertysearcherprojectbackend.exceptions.PropertyNotFoundException;
+import com.example.propertysearcherprojectbackend.exceptions.UserNotFoundException;
 import com.example.propertysearcherprojectbackend.repository.PropertyRepository;
+import com.example.propertysearcherprojectbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,9 +22,20 @@ public class PropertyService {
     private final ModelMapper modelMapper;
     private final AuditMessageService auditMessageService;
     private final PropertyRepository propertyRepository;
+    private final UserRepository userRepository;
 
     public List<Property> getAllProperties() {
         return propertyRepository.findAll();
+    }
+
+    public List<Property> getPropertiesByUser(Long userId) throws UserNotFoundException {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return propertyRepository.getPropertiesByUser(user);
+        } else {
+            throw new UserNotFoundException("User with id %s not found");
+        }
     }
 
     public Optional<Property> getProperty(final Long propertyId) throws PropertyNotFoundException {

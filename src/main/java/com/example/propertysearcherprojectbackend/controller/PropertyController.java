@@ -3,6 +3,7 @@ package com.example.propertysearcherprojectbackend.controller;
 import com.example.propertysearcherprojectbackend.domain.Property;
 import com.example.propertysearcherprojectbackend.dto.PropertyDto;
 import com.example.propertysearcherprojectbackend.exceptions.PropertyNotFoundException;
+import com.example.propertysearcherprojectbackend.exceptions.UserNotFoundException;
 import com.example.propertysearcherprojectbackend.service.PropertyService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -47,5 +48,11 @@ public class PropertyController {
     @PutMapping(value = "{propertyId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PropertyDto> updateProperty(@RequestBody PropertyDto propertyDto, @PathVariable Long propertyId) throws PropertyNotFoundException {
         return ResponseEntity.ok(modelMapper.map(propertyService.updateProperty(propertyDto, propertyId), PropertyDto.class));
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Property>> getPropertiesByUser(@PathVariable Long userId) throws UserNotFoundException {
+        List<Property> properties = propertyService.getPropertiesByUser(userId);
+        return ResponseEntity.ok(properties);
     }
 }

@@ -51,7 +51,7 @@ public class AppointmentService {
     public Appointment saveAppointment(AppointmentDto appointmentDto) {
        Appointment appointment = appointmentRepository.save(modelMapper.map(appointmentDto, Appointment.class));
         auditMessageService.saveAuditMessage(AuditMessage.builder()
-                .message("New appointment added: " + appointment.getAppointmentId() + " " + appointment.getAppointmentId())
+                .message("New appointment added: " + appointment.getAppointmentId() + " " + appointment.getDateOfMeeting() + " " +appointment.getDescription())
                 .createdAt(LocalDateTime.now())
                 .build());
         return appointment;

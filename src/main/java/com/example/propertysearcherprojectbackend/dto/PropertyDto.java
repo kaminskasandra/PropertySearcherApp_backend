@@ -17,5 +17,5 @@ public class PropertyDto {
     private String address;
     private String description;
     private double area;
-    private long realEstateAgencyId;
+    private Long userId;
 }

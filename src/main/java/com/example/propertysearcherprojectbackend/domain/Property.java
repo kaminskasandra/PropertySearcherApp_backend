@@ -36,13 +36,13 @@ public class Property {
     @Column(name = "AREA")
     private double area;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @OneToMany(targetEntity = Appointment.class,
             mappedBy = "property",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Appointment> appointments;
 }

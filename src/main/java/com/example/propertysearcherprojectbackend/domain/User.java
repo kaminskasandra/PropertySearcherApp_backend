@@ -34,15 +34,9 @@ public class User {
     @OneToMany(mappedBy = "toUserMail", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Message> receivedMessages;
 
-    @OneToMany(targetEntity = Appointment.class,
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    private List<Appointment> appointments;
-
     @OneToMany(targetEntity = Property.class,
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Property> properties;
 }

@@ -3,6 +3,7 @@ package com.example.propertysearcherprojectbackend.controller;
 import com.example.propertysearcherprojectbackend.domain.Appointment;
 import com.example.propertysearcherprojectbackend.dto.AppointmentDto;
 import com.example.propertysearcherprojectbackend.exceptions.AppointmentNotFoundException;
+import com.example.propertysearcherprojectbackend.exceptions.PropertyNotFoundException;
 import com.example.propertysearcherprojectbackend.exceptions.UserNotFoundException;
 import com.example.propertysearcherprojectbackend.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AppointmentDto> saveAppointment(@RequestBody AppointmentDto appointmentDto) {
+    public ResponseEntity<AppointmentDto> saveAppointment(@RequestBody AppointmentDto appointmentDto) throws UserNotFoundException, PropertyNotFoundException {
         return ResponseEntity.ok(modelMapper.map(appointmentService.saveAppointment(appointmentDto), AppointmentDto.class));
     }
 
@@ -54,7 +55,7 @@ public class AppointmentController {
     }
 
     @PutMapping(value = "{appointmentId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AppointmentDto> updateAppointment(@RequestBody AppointmentDto appointmentDto, @PathVariable Long appointmentId) throws AppointmentNotFoundException {
+    public ResponseEntity<AppointmentDto> updateAppointment(@RequestBody AppointmentDto appointmentDto, @PathVariable Long appointmentId) throws AppointmentNotFoundException, UserNotFoundException, PropertyNotFoundException {
         return ResponseEntity.ok(modelMapper.map(appointmentService.updateAppointment(appointmentDto, appointmentId), AppointmentDto.class));
     }
 }

@@ -22,7 +22,7 @@ public class PropertyController {
     private final PropertyService propertyService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PropertyDto> saveProperty(@RequestBody PropertyDto propertyDto) {
+    public ResponseEntity<PropertyDto> saveProperty(@RequestBody PropertyDto propertyDto) throws UserNotFoundException {
         return ResponseEntity.ok(modelMapper.map(propertyService.saveProperty(propertyDto), PropertyDto.class));
     }
 
@@ -46,7 +46,7 @@ public class PropertyController {
     }
 
     @PutMapping(value = "{propertyId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PropertyDto> updateProperty(@RequestBody PropertyDto propertyDto, @PathVariable Long propertyId) throws PropertyNotFoundException {
+    public ResponseEntity<PropertyDto> updateProperty(@RequestBody PropertyDto propertyDto, @PathVariable Long propertyId) throws PropertyNotFoundException, UserNotFoundException {
         return ResponseEntity.ok(modelMapper.map(propertyService.updateProperty(propertyDto, propertyId), PropertyDto.class));
     }
 

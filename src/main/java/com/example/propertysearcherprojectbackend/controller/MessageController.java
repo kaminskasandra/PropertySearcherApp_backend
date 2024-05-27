@@ -21,7 +21,7 @@ public class MessageController {
     private final MessageService messageService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MessageDto> saveProperty(@RequestBody MessageDto messageDto) throws UserNotFoundException {
+    public ResponseEntity<MessageDto> saveMessage(@RequestBody MessageDto messageDto) throws UserNotFoundException {
         return ResponseEntity.ok(modelMapper.map(messageService.saveMessage(messageDto), MessageDto.class));
     }
 

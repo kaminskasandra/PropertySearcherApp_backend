@@ -30,6 +30,7 @@ public class PropertyService {
         return propertyRepository.findAll();
     }
 
+    @Transactional
     public List<Property> getPropertiesByUser(Long userId) throws UserNotFoundException {
         Optional<User> userOptional = userRepository.findById(userId);
         if (userOptional.isPresent()) {

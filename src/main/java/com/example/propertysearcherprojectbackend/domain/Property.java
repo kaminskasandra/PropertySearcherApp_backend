@@ -1,5 +1,6 @@
 package com.example.propertysearcherprojectbackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,5 +45,6 @@ public class Property {
             mappedBy = "property",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Appointment> appointments;
 }

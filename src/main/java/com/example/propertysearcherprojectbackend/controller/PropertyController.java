@@ -51,8 +51,10 @@ public class PropertyController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Property>> getPropertiesByUser(@PathVariable Long userId) throws UserNotFoundException {
+    public List<PropertyDto> getPropertiesByUser(@PathVariable Long userId) throws UserNotFoundException {
         List<Property> properties = propertyService.getPropertiesByUser(userId);
-        return ResponseEntity.ok(properties);
+        return properties.stream()
+                .map(property -> modelMapper.map(property, PropertyDto.class))
+                .collect(Collectors.toList());
     }
 }

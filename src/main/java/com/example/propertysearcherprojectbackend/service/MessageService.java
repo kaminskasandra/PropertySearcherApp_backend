@@ -34,8 +34,8 @@ public class MessageService {
     }
 
     public Message saveMessage(MessageDto messageDto) throws UserNotFoundException {
-        User fromUser = userService.getUser(Long.valueOf(messageDto.getFromUserMail()));
-        User toUser = userService.getUser(Long.valueOf(messageDto.getToUserMail()));
+        User fromUser = userService.findByMail(messageDto.getFromUserMail());
+        User toUser = userService.findByMail(messageDto.getToUserMail());
 
         Message sentMessage = new Message(null, messageDto.getText(), LocalDate.now(), MessageCategory.SENT, fromUser, toUser);
         Message receivedMessage = new Message(null, messageDto.getText(), LocalDate.now(), MessageCategory.RECEIVED, fromUser, toUser);

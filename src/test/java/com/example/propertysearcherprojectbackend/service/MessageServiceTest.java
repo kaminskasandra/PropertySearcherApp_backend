@@ -79,16 +79,18 @@ public class MessageServiceTest {
         // Given
         MessageDto messageDto = new MessageDto();
         messageDto.setText("Test Message");
-        messageDto.setFromUserMail("1");
-        messageDto.setToUserMail("2");
+        messageDto.setFromUserMail("user1@example.com");
+        messageDto.setToUserMail("user2@example.com");
 
         User fromUser = new User();
         fromUser.setUserId(1L);
+        fromUser.setMail("user1@example.com");
+
         User toUser = new User();
         toUser.setUserId(2L);
-
-        when(userService.getUser(1L)).thenReturn(fromUser);
-        when(userService.getUser(2L)).thenReturn(toUser);
+        toUser.setMail("user2@example.com");
+        when(userService.findByMail("user1@example.com")).thenReturn(fromUser);
+        when(userService.findByMail("user2@example.com")).thenReturn(toUser);
         when(messageRepository.save(any(Message.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // When

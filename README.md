@@ -2,7 +2,7 @@ Frontend repository: https://github.com/kaminskasandra/PropertySearcherApp_front
 
 Property Searcher: an application that manages properties for sale. It allows you to add, delete and edit advertisements. Sending messages to sellers and arranging real estate meetings.
 
-Technology Stack (Application written in Java 17): 
+Technology Stack: 
  Java 17 
  Mockito 
  Lombok 

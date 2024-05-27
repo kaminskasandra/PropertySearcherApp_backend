@@ -1,6 +1,6 @@
 Frontend repository: https://github.com/kaminskasandra/PropertySearcherApp_frontend
 
-Property Searcher: an application that manages properties for sale. It allows you to add, delete and edit advertisements. Sending messages to sellers and arranging real estate meetings. You can add a property in your offers tab. After adding a real estate ad, it appears on the main page of the application.
+Property Searcher: an application that manages properties for sale. It allows you to add, delete and edit advertisements. Sending messages to sellers and arranging real estate meetings.
 
 Technology Stack (Application written in Java 17): 
  Java 17 
@@ -17,4 +17,5 @@ Installation and running:
 2. The application uses the H2 database.
 3. After start application run http://localhost:8081/
 4. Register a new user. Enter username, email, password and click 'register'.
-5. You can check the api documentation at this link: http://localhost:8080/swagger-ui/index.html
+5. You can add a property in your offers tab. After adding a real estate ad, it appears on the main page of the application.
+6. You can check the api documentation at this link: http://localhost:8080/swagger-ui/index.html
